@@ -59,6 +59,18 @@
     mode: 0755
   notify:
     - restart nginx
+  when: "'{{ ansible_distribution_release }}' == 'trusty'"
+
+- name: Nginx | Install the systemd service script
+  template:
+    src: nginx.service.j2
+    dest: /lib/systemd/system/nginx.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+  when: "'{{ ansible_distribution_release }}' == 'xenial'"
 
 - name: Nginx | Register Nginx as a service
   service:

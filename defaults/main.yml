@@ -1,7 +1,7 @@
 # file: nginx/defaults/main.yml
 
 nginx_install_method: "source"
-nginx_source_version: "1.8.0"
+nginx_source_version: "1.10.0"
 
 nginx_user: www-data
 nginx_group: www-data
@@ -169,4 +169,4 @@ nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_vers
 nginx_ngx_pagespeed_version: 1.9.32.4
 
 # OpenSSL configuration
-openssl_version: "1.0.2f"
+openssl_version: "1.0.2h"
