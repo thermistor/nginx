@@ -1,0 +1,11 @@
+---
+
+- name: Nginx | Install the upstart init script
+  template:
+    src: nginx.init.j2
+    dest: /etc/init.d/nginx
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - restart nginx

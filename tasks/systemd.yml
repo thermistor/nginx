@@ -1,0 +1,23 @@
+---
+
+- name: Nginx | Install the systemd service script
+  template:
+    src: nginx.service.j2
+    dest: /lib/systemd/system/nginx.service
+    owner: root
+    group: root
+    mode: 0644
+  register: nginx_service
+  notify:
+    - restart nginx
+
+- name: Symlink service to /etc/systemd/system
+  file:
+    path: /etc/systemd/system/nginx.service
+    src: /lib/systemd/system/nginx.service
+    state: link
+
+- name: Ensure systemd is reloaded if nginx.service has changed
+  command: systemctl daemon-reload
+  when: nginx_service|changed
+
