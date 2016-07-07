@@ -1,0 +1,36 @@
+---
+
+# can test install with:
+#   mmdblookup --file /etc/nginx/geoip2/GeoLite2-City.mmdb --ip 8.8.8.8
+#   mmdblookup --file /etc/nginx/geoip2/GeoLite2-City.mmdb --ip 8.8.8.8 subdivisions 0 iso_code
+- name: Nginx | Modules | Install libmaxminddb packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - libmaxminddb0
+    - libmaxminddb-dev
+    - mmdb-bin
+
+- name: Nginx | Modules | Download the ngx_http_geoip2_module source
+  get_url:
+    url: "{{nginx_geoip2_url}}"
+    dest: "/tmp/ngx_http_geoip2_module.tar.gz"
+
+- name: Nginx | Modules | Unpack the ngx_http_geoip2_module source
+  command: tar -xvzf /tmp/ngx_http_geoip2_module.tar.gz chdir=/tmp creates=/tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}}
+
+- name: Nginx | Modules | Create directory inside nginx
+  file: path={{nginx_dir}}/geoip2 state=directory
+
+- name: Nginx | Modules | Download GeoLite2 City database files
+  get_url: url={{nginx_geoip2_city_data_url}} dest={{nginx_dir}}/geoip2/GeoLite2-City.mmdb.gz
+
+- name: Nginx | Modules | Check if the GeoLite2 City file exists
+  stat: path={{nginx_dir}}/geoip2/GeoLite2-City.mmdb
+  register: geolite2city_file
+
+- name: Nginx | Modules | Unarchive GeoLite2 City files
+  shell: gunzip -c {{nginx_dir}}/geoip2/GeoLite2-City.mmdb.gz > {{nginx_dir}}/geoip2/GeoLite2-City.mmdb
+  when: not geolite2city_file.stat.exists
+
+- name: Nginx | Modules | Copy geoip2 config
+  template: src=geoip2.conf.j2 dest={{nginx_dir}}/conf.d/geoip2.conf
