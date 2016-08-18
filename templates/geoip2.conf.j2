@@ -1,5 +1,5 @@
 geoip2 /etc/nginx/geoip2/GeoLite2-City.mmdb {
-  $geoip2_data_country_name country iso_code;
+  $geoip2_data_country_code country iso_code;
   $geoip2_data_region0 subdivisions 0 iso_code;
   $geoip2_data_city_name default=Seattle city names en;
   $geoip2_data_latitude location latitude;
