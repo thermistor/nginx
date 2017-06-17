@@ -10,3 +10,5 @@
 - include: sites.yml
 - include: monit.yml
   when: monit_protection is defined and monit_protection == true
+- include: logrotate.yml
+  when: nginx_use_logrotate

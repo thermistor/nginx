@@ -175,3 +175,7 @@ nginx_ngx_pagespeed_version: 1.9.32.4
 
 # OpenSSL configuration
 openssl_version: "1.0.2h"
+
+# logrotate configuration
+nginx_use_logrotate: yes
+nginx_logrotate_rotations: 50
