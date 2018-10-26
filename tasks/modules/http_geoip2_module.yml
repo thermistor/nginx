@@ -1,22 +1,23 @@
 ---
-
 # can test install with:
 #   mmdblookup --file /etc/nginx/geoip2/GeoLite2-City.mmdb --ip 8.8.8.8
 #   mmdblookup --file /etc/nginx/geoip2/GeoLite2-City.mmdb --ip 8.8.8.8 subdivisions 0 iso_code
-- name: Nginx | Modules | Install libmaxminddb packages
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - libmaxminddb0
-    - libmaxminddb-dev
-    - mmdb-bin
 
-- name: Nginx | Modules | Download the ngx_http_geoip2_module source
+- name: Nginx | Modules | Install libmaxminddb packages
+  apt:
+    state: latest
+    name:
+      - libmaxminddb0
+      - libmaxminddb-dev
+      - mmdb-bin
+
+- name: Nginx | Modules | Download the ngx_http_geoip2_module source {{nginx_geoip2_url}}
   get_url:
     url: "{{nginx_geoip2_url}}"
-    dest: "/tmp/ngx_http_geoip2_module.tar.gz"
+    dest: /tmp/ngx_http_geoip2_module.tar.gz
 
-- name: Nginx | Modules | Unpack the ngx_http_geoip2_module source
-  command: tar -xvzf /tmp/ngx_http_geoip2_module.tar.gz chdir=/tmp creates=/tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}}
+- name: Nginx | Modules | Unpack the ngx_http_geoip2_module source, version {{nginx_geoip2_version}}
+  command: tar -xvzf /tmp/ngx_http_geoip2_module.tar.gz chdir=/tmp creates=/tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}} warn=False
 
 - name: Nginx | Modules | Create directory inside nginx
   file: path={{nginx_dir}}/geoip2 state=directory

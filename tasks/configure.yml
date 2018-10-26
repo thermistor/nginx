@@ -1,4 +1,4 @@
-# nginx/tasks/configure.yml
+---
 
 - name: Nginx | Make sure the mime.types file is up to date
   copy:

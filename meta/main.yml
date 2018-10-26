@@ -1,24 +1,16 @@
-# file: nginx/meta/main.yml
-
+---
 galaxy_info:
-  author: pjan vandaele
-  company: ANXS
-  description: Install and configure Nginx
+  author: Weston Triemstra
+  company: Netsign
+  description: Install and configure Nginx, derived from ANXS.nginx
   min_ansible_version: 2.0
   license: MIT
   platforms:
-  - name: Ubuntu
-    versions:
-    - all
-  categories:
-  - system
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+  galaxy_tags:
+    - nginx
 
-dependencies:
-  - ANXS.hostname
-  - ANXS.apt
-  - role: ANXS.build-essential
-    when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: ANXS.perl
-    when: nginx_install_method is defined and nginx_install_method == "source"
-  - role: ANXS.monit
-    when: monit_protection is defined and monit_protection == true
+dependencies: []

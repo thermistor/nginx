@@ -1,4 +1,4 @@
-# file: nginx/tasks/modules.yml
+---
 
 - include: modules/http_stub_status_module.yml
   when: nginx_source_modules_included.http_stub_status_module is defined
@@ -38,9 +38,6 @@
 
 - include: modules/ngx_pagespeed.yml
   when: nginx_source_modules_included.ngx_pagespeed is defined
-
-- include: modules/http_geoip_module.yml
-  when: nginx_source_modules_included.http_geoip_module is defined
 
 - include: modules/http_geoip2_module.yml
   when: nginx_source_modules_included.http_geoip2_module is defined

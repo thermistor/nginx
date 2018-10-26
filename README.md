@@ -1,29 +1,19 @@
-## ANXS - nginx [![Build Status](https://travis-ci.org/ANXS/nginx.svg?branch=master)](https://travis-ci.org/ANXS/nginx)
+# nginx
 
-Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
+Ansible role which installs and configures Nginx from source (including a series of optional modules).
 
+Derived from [ANXS.nginx](https://github.com/ANXS/nginx).
 
-#### Requirements & Dependencies
+NOTE: This documentation is out of date!
 
-##### Ansible
+## Platforms
 
-It has been tested on Ansible 1.5 and above, and depends on the following roles:
-  - ANXS.apt
-  - ANXS.build-essential
-  - ANXS.perl
-  - ANXS.monit (if you want monit protection)
+Currently it's been developed for, and tested on Ubuntu.
 
+## Variables
 
-##### Platforms
+### default (nginx.conf)
 
-Currently it's been developed for, and tested on Ubuntu. It is assumed to work on other Debian distributions as well.
-
-
-#### Variables
-
-##### default (nginx.conf)
-
-- `nginx_install_method` - "source" or "package"
 - `nginx_user` - user Nginx will run as
 - `nginx_uid` - the uid for this user
 - `nginx_group` - Nginx group
@@ -79,7 +69,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_default_root` - the directory to place the default site
 - `nginx_default_enable` - whether or not to actually enable the defaul site
 
-##### source
+### source
 - `nginx_source_version` - the version of Nginx to install
 - `nginx_source_url` - URL for the Nginx source (versioned). By default it will get it from `nginx_source_version`
 - `nginx_source_prefix` - prefix for installing nginx from source (versioned)
@@ -147,10 +137,6 @@ nginx_disabled_sites:
   - webmail.localhost
 ```
 
-##### Monit ?
-You can put Nginx under monit monitoring protection, by setting `monit_protection: yes`
-
-
 ##### Modules
 
 ###### gzip module
@@ -204,9 +190,8 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 To the contributors:
 - [Jean-Denis Vauguet](https://github.com/chikamichi)
 
-
 #### Testing
-This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`. 
+This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`.
 
 See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
 
@@ -223,4 +208,4 @@ Licensed under the MIT License. See the LICENSE file for details.
 
 #### Feedback, bug-reports, requests, ...
 
-Are [welcome](https://github.com/ANXS/nginx/issues)!
+Are [welcome](https://github.com/thermistor/nginx/issues)!

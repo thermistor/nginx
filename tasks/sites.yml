@@ -1,4 +1,4 @@
-# file: nginx/tasks/sites.yml
+---
 
 - name: Nginx | Update the configurations for the sites inventory
   template:
@@ -24,7 +24,7 @@
   with_items: "{{nginx_enabled_sites}}"
   notify:
     - reload nginx
-  when: "{{nginx_enabled_sites|lower != 'none'}}"
+  when: nginx_enabled_sites|lower != 'none'
 
 - name: Nginx | Disable sites
   file:
@@ -33,4 +33,4 @@
   with_items: "{{nginx_disabled_sites}}"
   notify:
     - reload nginx
-  when: "{{nginx_disabled_sites|lower != 'none'}}"
+  when: nginx_disabled_sites|lower != 'none'
