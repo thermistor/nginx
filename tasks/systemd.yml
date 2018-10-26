@@ -14,4 +14,3 @@
 - name: Ensure systemd is reloaded if nginx.service has changed
   command: systemctl daemon-reload
   when: nginx_service is changed
-
