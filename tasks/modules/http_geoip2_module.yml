@@ -19,19 +19,5 @@
 - name: Nginx | Modules | Unpack the ngx_http_geoip2_module source, version {{nginx_geoip2_version}}
   command: tar -xvzf /tmp/ngx_http_geoip2_module.tar.gz chdir=/tmp creates=/tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}} warn=False
 
-- name: Nginx | Modules | Create directory inside nginx
-  file: path={{nginx_dir}}/geoip2 state=directory
-
-- name: Nginx | Modules | Download GeoLite2 City database files
-  get_url: url={{nginx_geoip2_city_data_url}} dest={{nginx_dir}}/geoip2/GeoLite2-City.mmdb.gz
-
-- name: Nginx | Modules | Check if the GeoLite2 City file exists
-  stat: path={{nginx_dir}}/geoip2/GeoLite2-City.mmdb
-  register: geolite2city_file
-
-- name: Nginx | Modules | Unarchive GeoLite2 City files
-  shell: gunzip -c {{nginx_dir}}/geoip2/GeoLite2-City.mmdb.gz > {{nginx_dir}}/geoip2/GeoLite2-City.mmdb
-  when: not geolite2city_file.stat.exists
-
 - name: Nginx | Modules | Copy geoip2 config
   template: src=geoip2.conf.j2 dest={{nginx_dir}}/conf.d/geoip2.conf
