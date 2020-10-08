@@ -1,0 +1,24 @@
+---
+# - name: Nginx | Modules | Download the ngx_brotli source {{nginx_brotli_url}}
+#   get_url:
+#     url: "{{nginx_brotli_url}}"
+#     dest: /tmp/ngx_brotli_{{nginx_brotli_version}}.tar.gz
+
+# - name: Nginx | Modules | Unpack the ngx_brotli source, version {{nginx_brotli_version}}
+#   unarchive:
+#     src: /tmp/ngx_brotli_{{nginx_brotli_version}}.tar.gz
+#     dest: /tmp
+#     remote_src: yes
+
+- name: Nginx | Modules | Git clone Brotli module (google/ngx_brotli)
+  git:
+    repo: https://github.com/google/ngx_brotli.git
+    dest: /usr/local/src/ngx_brotli
+    recursive: yes
+    update: yes
+
+- name: Nginx | Modules | Copy brotli config
+  copy:
+    src: brotli.conf
+    dest: "{{nginx_dir}}/conf.d/brotli.conf"
+    mode: 0644

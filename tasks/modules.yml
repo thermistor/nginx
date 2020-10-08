@@ -41,3 +41,6 @@
 
 - include: modules/http_geoip2_module.yml
   when: nginx_source_modules_included.http_geoip2_module is defined
+
+- include: modules/brotli_module.yml
+  when: nginx_source_modules_included.brotli is defined

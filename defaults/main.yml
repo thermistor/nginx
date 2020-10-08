@@ -78,11 +78,12 @@ nginx_source_modules_included:
   google_perftools_module: "--with-google_perftools_module"
   ipv6_module: "--with-ipv6"
   http_real_ip_module: "--with-http_realip_module"
-  http_spdy_module: "--with-http_spdy_module"
   http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
   http_geoip2_module: "--add-module=/tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}}"
+  httpv2: "--with-http_v2_module"
+  brotli: "--add-module=/usr/local/src/ngx_brotli"
 
 nginx_source_modules_excluded:
   - mail_pop3_module
@@ -164,6 +165,10 @@ nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_vers
 
 # ngx_pagespeed_module configuration
 nginx_ngx_pagespeed_version: 1.9.32.4
+
+# ngix_brotli_module configuration
+# nginx_brotli_version: "1.0.0rc"
+# nginx_brotli_url: https://github.com/google/ngx_brotli/archive/v{{nginx_brotli_version}}.tar.gz
 
 # OpenSSL configuration
 openssl_version: "1.1.1h"
