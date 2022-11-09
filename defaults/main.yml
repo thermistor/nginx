@@ -78,7 +78,6 @@ nginx_source_modules_included:
   google_perftools_module: "--with-google_perftools_module"
   ipv6_module: "--with-ipv6"
   http_real_ip_module: "--with-http_realip_module"
-  http_perl_module: "--with-http_perl_module"
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
   http_geoip2_module: "--add-module=/tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}}"
@@ -123,7 +122,7 @@ nginx_geoip_country: "{{nginx_dir}}/geoip/GeoIP.dat"
 nginx_geoip_city: "{{nginx_dir}}/geoip/GeoLiteCity.dat"
 
 # ngx_http_geoip2_module configuration
-nginx_geoip2_version: "3.3"
+nginx_geoip2_version: "3.4"
 nginx_geoip2_url: "https://github.com/leev/ngx_http_geoip2_module/archive/{{nginx_geoip2_version}}.tar.gz"
 nginx_geoip2_city_db: /etc/nginx/geoip2/GeoLite2-City.mmdb
 
@@ -143,7 +142,7 @@ nginx_upload_progress_zone_size: "1m"
 nginx_upload_progress_url: "https://github.com/masterzen/nginx-upload-progress-module/archive/v{{nginx_upload_progress_version}}.tar.gz"
 
 # headers_more_module configuration
-nginx_headers_more_version: "0.33"
+nginx_headers_more_version: "0.34"
 nginx_headers_more_url: "https://github.com/openresty/headers-more-nginx-module/archive/v{{nginx_headers_more_version}}.tar.gz"
 
 # http_auth_request_module configuration
@@ -164,14 +163,14 @@ nginx_naxsi_version: "0.53"
 nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"
 
 # ngx_pagespeed_module configuration
-nginx_ngx_pagespeed_version: 1.9.32.4
+nginx_ngx_pagespeed_version: 1.9.32.10
 
 # ngix_brotli_module configuration
 # nginx_brotli_version: "1.0.0rc"
 # nginx_brotli_url: https://github.com/google/ngx_brotli/archive/v{{nginx_brotli_version}}.tar.gz
 
 # OpenSSL configuration
-openssl_version: "1.1.1h"
+openssl_version: "1.1.1q"
 
 # logrotate configuration
 nginx_use_logrotate: yes
