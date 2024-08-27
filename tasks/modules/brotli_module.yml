@@ -11,14 +11,14 @@
 #     remote_src: yes
 
 - name: Nginx | Modules | Git clone Brotli module (google/ngx_brotli)
-  git:
+  ansible.builtin.git:
     repo: https://github.com/google/ngx_brotli.git
     dest: /usr/local/src/ngx_brotli
     recursive: yes
     update: yes
 
 - name: Nginx | Modules | Copy brotli config
-  copy:
+  ansible.builtin.copy:
     src: brotli.conf
     dest: "{{nginx_dir}}/conf.d/brotli.conf"
     mode: 0644

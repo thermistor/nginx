@@ -4,20 +4,25 @@
 #   mmdblookup --file /etc/nginx/geoip2/GeoLite2-City.mmdb --ip 8.8.8.8 subdivisions 0 iso_code
 
 - name: Nginx | Modules | Install libmaxminddb packages
-  apt:
+  ansible.builtin.apt:
     state: latest
-    name:
+    pkg:
       - libmaxminddb0
       - libmaxminddb-dev
       - mmdb-bin
 
 - name: Nginx | Modules | Download the ngx_http_geoip2_module source {{nginx_geoip2_url}}
-  get_url:
+  ansible.builtin.get_url:
     url: "{{nginx_geoip2_url}}"
     dest: /tmp/ngx_http_geoip2_module.tar.gz
 
 - name: Nginx | Modules | Unpack the ngx_http_geoip2_module source, version {{nginx_geoip2_version}}
-  command: tar -xvzf /tmp/ngx_http_geoip2_module.tar.gz chdir=/tmp creates=/tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}} warn=False
+  ansible.builtin.command: tar -xvzf /tmp/ngx_http_geoip2_module.tar.gz
+  args:
+    chdir: /tmp
+    creates: /tmp/ngx_http_geoip2_module-{{nginx_geoip2_version}}
 
 - name: Nginx | Modules | Copy geoip2 config
-  template: src=geoip2.conf.j2 dest={{nginx_dir}}/conf.d/geoip2.conf
+  ansible.builtin.template:
+    src: geoip2.conf.j2
+    dest: "{{nginx_dir}}/conf.d/geoip2.conf"
