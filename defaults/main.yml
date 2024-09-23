@@ -64,6 +64,8 @@ nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.
 nginx_source_prefix: "/usr/local/nginx/nginx-{{nginx_source_version}}"
 nginx_source_conf_path: "{{nginx_dir}}/nginx.conf"
 nginx_source_sbin_path: "{{nginx_source_prefix}}/sbin/nginx"
+nginx_cflags: null
+nginx_ldflags: null
 nginx_source_default_configure_flags: "--prefix={{nginx_source_prefix}} --conf-path={{nginx_source_conf_path}} --sbin-path={{nginx_source_sbin_path}}"
 
 nginx_source_modules_included:

@@ -8,7 +8,7 @@
         state: present
         update_cache: yes
       with_items: ["perl", "libperl-dev", "monit", "build-essential", "python-httplib2"]
-    - include: 'tasks/main.yml'
+    - import_tasks: 'tasks/main.yml'
     - name: Nginx | Check if nginx is available
       uri: url="http://127.0.0.1" status=200
 
@@ -17,4 +17,4 @@
       service:
         name: monit
         state: restarted
-    - include: 'handlers/main.yml'
+    - import_tasks: 'handlers/main.yml'

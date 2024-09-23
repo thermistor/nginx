@@ -1,9 +1,9 @@
 ---
 
-- include: source.yml
-- include: scripts.yml
-- include: configure.yml
-# - include: default_site.yml
-- include: sites.yml
-- include: logrotate.yml
+- import_tasks: source.yml
+- import_tasks: scripts.yml
+- import_tasks: configure.yml
+# - import_tasks: default_site.yml
+- import_tasks: sites.yml
+- import_tasks: logrotate.yml
   when: nginx_use_logrotate

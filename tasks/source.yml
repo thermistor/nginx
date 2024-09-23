@@ -1,7 +1,7 @@
 ---
 
-- include: user.yml
-- include: directories.yml
+- import_tasks: user.yml
+- import_tasks: directories.yml
 
 - name: Nginx | Make sure the Nginx build dependencies are installed
   apt:
@@ -17,7 +17,7 @@
     url: "{{nginx_source_url}}"
     dest: "/tmp/nginx-{{nginx_source_version}}.tar.gz"
 
-- include: "modules.yml"
+- import_tasks: "modules.yml"
 
 - name: Nginx | Unpack the compressed Nginx source
   command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz
@@ -37,7 +37,7 @@
 - name: Nginx | Compile the Nginx source
   shell: >
     cd /tmp/nginx-{{nginx_source_version}} &&
-    ./configure {{nginx_source_configure_flags}} &&
+    {{nginx_cflags}} {{nginx_ldflags}} ./configure {{nginx_source_configure_flags}} &&
     make &&
     make install
   when: nginx_flags.changed
@@ -49,7 +49,7 @@
     state: link
     force: yes
 
-- include: systemd.yml
+- import_tasks: systemd.yml
 
 - name: Nginx | Register Nginx as a service
   service:
