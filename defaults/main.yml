@@ -1,7 +1,10 @@
 # file: nginx/defaults/main.yml
 
 nginx_install_method: source
-nginx_source_version: 1.19.3
+nginx_source_version: 1.26.2
+
+# OpenSSL configuration
+nginx_openssl_version: "3.3.2"
 
 nginx_user: www-data
 nginx_group: www-data
@@ -71,7 +74,7 @@ nginx_source_default_configure_flags: "--prefix={{nginx_source_prefix}} --conf-p
 nginx_source_modules_included:
   http_stub_status_module: "--with-http_stub_status_module"
   http_ssl_module: "--with-http_ssl_module"
-  openssl: "--with-openssl=/tmp/openssl-{{ openssl_version }}"
+  openssl: "--with-openssl=/tmp/openssl-{{ nginx_openssl_version }}"
   http_gzip_static_module: "--with-http_gzip_static_module"
   upload_progress_module: "--add-module=/tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}"
   headers_more_module: "--add-module=/tmp/headers-more-nginx-module-{{nginx_headers_more_version}}"
@@ -171,8 +174,6 @@ nginx_ngx_pagespeed_version: 1.9.32.10
 # nginx_brotli_version: "1.0.0rc"
 # nginx_brotli_url: https://github.com/google/ngx_brotli/archive/v{{nginx_brotli_version}}.tar.gz
 
-# OpenSSL configuration
-openssl_version: "1.1.1q"
 
 # logrotate configuration
 nginx_use_logrotate: yes

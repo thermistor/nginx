@@ -3,13 +3,13 @@
 
 - name: get openssl source
   get_url:
-    url: "https://www.openssl.org/source/openssl-{{ openssl_version }}.tar.gz"
-    dest: /tmp/openssl-{{ openssl_version }}.tar.gz
+    url: https://github.com/openssl/openssl/releases/download/openssl-{{ nginx_openssl_version }}/openssl-{{ nginx_openssl_version }}.tar.gz
+    dest: /tmp/openssl-{{ nginx_openssl_version }}.tar.gz
   when: nginx_source_modules_included.openssl is defined
 
 - name: extract openssl source
   unarchive:
-    src: /tmp/openssl-{{ openssl_version }}.tar.gz
+    src: /tmp/openssl-{{ nginx_openssl_version }}.tar.gz
     dest: /tmp
     remote_src: yes
   when: nginx_source_modules_included.openssl is defined
