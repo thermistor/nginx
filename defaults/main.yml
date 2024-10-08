@@ -14,7 +14,7 @@ nginx_gid: 33
 nginx_dir: "/etc/nginx"
 nginx_www_dir: "/srv/www"
 nginx_log_dir: "/var/log/nginx"
-nginx_pid: "/var/run/nginx.pid"
+nginx_pid: "/run/nginx.pid"
 
 # nginx.conf
 nginx_worker_processes: 4

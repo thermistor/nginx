@@ -7,8 +7,8 @@ Type=forking
 PIDFile={{ nginx_pid }}
 ExecStartPre={{ nginx_source_sbin_path }} -t
 {% if nginx_source_modules_included.passenger_module is defined %}
-ExecStartPre=-/bin/mkdir /var/run/passenger-instreg
-ExecStartPre=/bin/chmod 1777 /var/run/passenger-instreg
+ExecStartPre=-/bin/mkdir /run/passenger-instreg
+ExecStartPre=/bin/chmod 1777 /run/passenger-instreg
 {% endif %}
 ExecStart={{ nginx_source_sbin_path }}
 ExecReload=/bin/kill -s HUP $MAINPID
